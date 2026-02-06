@@ -9,7 +9,30 @@ public class Goods{
 	private String explain;//설명 null
 	
 	//setXXX
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	public void setExplain(String explain) {
+		this.explain = explain;
+	}
 	
 	//getxx
-
+	public String getCode() {
+		return this.code;
+	}
+	public String getName() {
+		return this.name;
+	}
+	public int getPrice() {
+		return this.price;
+	}
+	public String getExplain() {
+		return this.explain;
+	}
 }

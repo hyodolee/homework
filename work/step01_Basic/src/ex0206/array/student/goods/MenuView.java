@@ -19,7 +19,7 @@ public class MenuView{
 
 	  while(true){
          System.out.println("---------------------------------------------------------------------------");
-		 System.out.println("1.등록     2.전체검색      3.상품코드검색    4. 수정하기     9.종료");
+		 System.out.println("1.등록     2.전체검색      3.상품코드검색    4. 수정하기      5.삭제하기      9.종료");
 		 System.out.println("----------------------------------------------------------------------------");
 
          System.out.print("메뉴 선택 > ");
@@ -36,6 +36,8 @@ public class MenuView{
 				 this.inputSelectByCode(); break;
 			 case 4 : 
 				 this.inputUpdate() ; break;
+			 case 5 : 
+				 this.inputDelete() ; break;	 
 			 case 9 : 
 				 System.out.println("다음에 또 이용해주세요. 프로그램 종료합니다.");
 				 System.exit(0); 
@@ -64,12 +66,14 @@ public class MenuView{
 
 	   System.out.print("상품설명 > ");
 	   String explain = sc.nextLine();
-
-
-	 //생성자를 추가하여 값을 전달하자(데이터 초기화)
-      // Goods goods = new Goods();
-
-	   int result = service.insert(null);
+	   
+	   Goods goods = new Goods();
+	   goods.setCode(code);
+	   goods.setName(name);
+	   goods.setPrice(price);
+	   goods.setExplain(explain);
+	   
+	   int result = service.insert(goods);
 
 	   if(result==-1)
 		  EndView.printMessage("더이상 등록할 수 없습니다.");
@@ -107,8 +111,13 @@ public class MenuView{
 
 	   System.out.print("변경 상품설명 > ");
 	   String explain = sc.nextLine();
+	   
+	   Goods good = new Goods();
+	   good.setCode(code);
+	   good.setPrice(price);
+	   good.setExplain(explain);
 
-	   if(service.update(null) ){
+	   if(service.update(good) ){
           EndView.printMessage("상품이 수정되었습니다.");
 	   }else{
           EndView.printMessage("상품이 수정되지않았습니다.");
@@ -116,7 +125,27 @@ public class MenuView{
 
 
   }//메소드끝
-
-
+  
+  /**
+	 *  상품삭제
+	 *  @param : 
+	 *  @return : 
+	 **/
+  public void inputDelete() {
+	  //키보드입력 4개 받기 
+	   System.out.print("삭제할 상품의 상품코드 입력 > ");
+	   String code = sc.nextLine();
+	   
+	   Goods goods = new Goods();
+	   goods.setCode(code);
+	   
+	   boolean result = service.delete(goods);
+	   
+	   if(result){
+          EndView.printMessage("상품이 삭제되었습니다.");
+	   }else{
+          EndView.printMessage("상품이 삭제되지않았습니다.");
+	   }
+  }
 
 }//클래스끝

@@ -1,4 +1,7 @@
 package ex0206.array.student.goods;
+
+import ex0206.array.student.Student;
+
 /**
   각 요청에 대한 로직(기능)을 담당할 클래스
   (등록 , 전체검색, 부분검색, 수정, 삭제 등등.....)
@@ -7,7 +10,8 @@ public class GoodsService{
 
 	//상품을 관리할 배열 선언
 	private Goods [] goodsArr = new Goods [10];
-	public static int count;//0 배열방에 저장 객체의 개수 
+	public static int count;//0 배열방에 저장 객체의 개수
+	public static int searchedIdx; 
 
 
 
@@ -23,8 +27,11 @@ public class GoodsService{
 		};
    */
    public void init(String [][] data){
-	  
+	  int cnt = data.length;
 	   
+	  for(int i =0; i < cnt; i++) {
+		  this.goodsArr[count++] = create(data[i]);
+	  }
 
    }//메소드끝
 
@@ -33,9 +40,12 @@ public class GoodsService{
       Goods를 생성해서 값을 설정하고 생성된 Goos를 리턴하는 메소드 
    */
    private Goods create(String [] row){//{"A01" , "새우깡" , "2500" , "짜고 맛나다."}
-         
-
-		 return null;
+         Goods goods = new Goods();
+         goods.setCode(row[0]);
+         goods.setName(row[1]);
+         goods.setPrice(Integer.parseInt(row[2]));
+         goods.setExplain(row[3]);
+		 return goods;
    }
 
 
@@ -52,13 +62,16 @@ public class GoodsService{
    public int insert(Goods goods){
 
 	   // 배열의 길이 체크
-	   
+	   if(goodsArr.length == count) return -1;
 
 	   //중복체크 
-	 
-
+	   Goods searchedGoods = selectByCode(goods.getCode());
+	   
+	   if(searchedGoods != null) return 0;
+	   
+	   goodsArr[count++] = goods;
 	  
-      return 0;
+      return 1;
    }
 
 
@@ -66,8 +79,7 @@ public class GoodsService{
      전체검색
    */
    public Goods[]  selectAll( ){
-     
-      return null;//
+      return goodsArr;//
    }
 
    /**
@@ -76,7 +88,13 @@ public class GoodsService{
 	           없으면 null 리턴
    */
    public Goods selectByCode(String code){
-       
+       for(int i = 0; i < count; i++) {
+    	   if(goodsArr[i].getCode().equals(code)) {
+    		   searchedIdx = i;
+    		   return goodsArr[i];
+    	   }
+    		    
+       }
        
        return null;
    }
@@ -87,7 +105,39 @@ public class GoodsService{
 	@return : true이면 수정완료, false이면 수정실패
    */
    public boolean update(Goods goods){ //수정하려는 코드, 변경값 - 가격, 설명
-      
-       return false;
-   }
+	    Goods searchedGoods = selectByCode(goods.getCode());
+		 
+		if(searchedGoods == null) {
+			System.out.println("수정할수 없습니다.");
+			return false;
+		}else {
+			searchedGoods.setPrice(goods.getPrice());
+			searchedGoods.setExplain(goods.getExplain());
+		}
+		   
+		return true;
+	}
+   
+   /**
+   상품코드에 해당하는 가격, 설명 수정하기 
+	 @return : true이면 삭제완료, false이면 삭제실패
+   */
+   public boolean delete(Goods goods){ 
+	    Goods searchedGoods = selectByCode(goods.getCode());
+	    int cnt = searchedIdx;
+		 
+		if(searchedGoods == null) {
+			System.out.println("삭제할수 없습니다. 코드를 다시 입력해 주세요");
+			return false;
+		}else {
+			for(int i = searchedIdx; i < count; i++ ) {
+				goodsArr[cnt] = goodsArr[++cnt];
+			}
+			
+			count--;
+		}
+		   
+		return true;
+	}
+   
 }
