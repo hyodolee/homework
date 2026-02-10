@@ -1,4 +1,4 @@
-package ex0206.array.student.goods;
+package ex0206.array.goods;
 import java.util.Scanner;
 /**
  키보드 입력을 받아 각 기능을 호출해줄 View
@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class MenuView{
 
  private Scanner sc = new Scanner(System.in);
- private GoodsService service = new GoodsService(); //전역변수 초기화
+ private GoodsService service; //전역변수 초기화
 
   /**
     전체 메뉴를 출력하는 메소드 
@@ -14,8 +14,8 @@ public class MenuView{
   public void printMenu(String [][] data){
 
       //전달 받은 초기치 데이터를 서비스에 전달해서 배열에 저장한다.
-      service.init(data);
-
+      //service.init(data);
+	  service = new GoodsService(data);
 
 	  while(true){
          System.out.println("---------------------------------------------------------------------------");
@@ -42,7 +42,7 @@ public class MenuView{
 				 System.out.println("다음에 또 이용해주세요. 프로그램 종료합니다.");
 				 System.exit(0); 
 			 break;
-			 	default: System.out.println("메뉴는 1~4 or 9 만 입력해주세요.");
+			 	default: System.out.println("메뉴는 1~5 or 9 만 입력해주세요.");
 
 		 }//switch문
 
@@ -67,11 +67,7 @@ public class MenuView{
 	   System.out.print("상품설명 > ");
 	   String explain = sc.nextLine();
 	   
-	   Goods goods = new Goods();
-	   goods.setCode(code);
-	   goods.setName(name);
-	   goods.setPrice(price);
-	   goods.setExplain(explain);
+	   Goods goods = new Goods(code, name, price, explain);
 	   
 	   int result = service.insert(goods);
 
@@ -112,10 +108,7 @@ public class MenuView{
 	   System.out.print("변경 상품설명 > ");
 	   String explain = sc.nextLine();
 	   
-	   Goods good = new Goods();
-	   good.setCode(code);
-	   good.setPrice(price);
-	   good.setExplain(explain);
+	   Goods good = new Goods(code, price, explain);
 
 	   if(service.update(good) ){
           EndView.printMessage("상품이 수정되었습니다.");
@@ -132,12 +125,10 @@ public class MenuView{
 	 *  @return : 
 	 **/
   public void inputDelete() {
-	  //키보드입력 4개 받기 
 	   System.out.print("삭제할 상품의 상품코드 입력 > ");
 	   String code = sc.nextLine();
 	   
-	   Goods goods = new Goods();
-	   goods.setCode(code);
+	   Goods goods = new Goods(code);
 	   
 	   boolean result = service.delete(goods);
 	   

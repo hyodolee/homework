@@ -1,4 +1,4 @@
-package ex0206.array.student.goods;
+package ex0206.array.goods;
 
 public class  StartView{
 	public static void main(String[] args) {

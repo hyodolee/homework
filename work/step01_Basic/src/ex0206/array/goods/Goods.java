@@ -1,4 +1,4 @@
-package ex0206.array.student.goods;
+package ex0206.array.goods;
 /**
   상품으로 속성을 관리하는 개체
 */
@@ -8,6 +8,26 @@ public class Goods{
 	private int price;//가격 0 
 	private String explain;//설명 null
 	
+	//생성자
+	public Goods(String code, int price, String explain) {
+		this.code = code;
+		this.price = price;
+		this.explain = explain;
+	}
+	
+	public Goods(String code, String name, int price, String explain) {
+		this.code = code;
+		this.name = name;
+		this.price = price;
+		this.explain = explain;
+	}
+	
+	public Goods(String code) {
+		this.code = code;
+	}
+
+	public Goods() {}
+
 	//setXXX
 	public void setCode(String code) {
 		this.code = code;

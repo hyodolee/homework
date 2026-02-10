@@ -1,4 +1,4 @@
-package ex0206.array.student.goods;
+package ex0206.array.goods;
 
 import ex0206.array.student.Student;
 
@@ -13,8 +13,6 @@ public class GoodsService{
 	public static int count;//0 배열방에 저장 객체의 개수
 	public static int searchedIdx; 
 
-
-
    /**
       초기치 데이터를 세팅하는 메소드
 	  String [][] data = new String [][]{
@@ -26,15 +24,22 @@ public class GoodsService{
 			 
 		};
    */
-   public void init(String [][] data){
-	  int cnt = data.length;
-	   
+//   public void init(String [][] data){
+//	  int cnt = data.length;
+//	   
+//	  for(int i =0; i < cnt; i++) {
+//		  this.goodsArr[count++] = create(data[i]);
+//	  }
+//
+//   }//메소드끝
+
+	public GoodsService(String [][] data){
+		int cnt = data.length;
+		
 	  for(int i =0; i < cnt; i++) {
 		  this.goodsArr[count++] = create(data[i]);
 	  }
-
-   }//메소드끝
-
+	}
 
    /**
       Goods를 생성해서 값을 설정하고 생성된 Goos를 리턴하는 메소드 
@@ -78,7 +83,7 @@ public class GoodsService{
    /**
      전체검색
    */
-   public Goods[]  selectAll( ){
+   public Goods[] selectAll( ){
       return goodsArr;//
    }
 
