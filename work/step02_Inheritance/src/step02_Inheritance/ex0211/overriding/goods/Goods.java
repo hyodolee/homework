@@ -1,4 +1,4 @@
-package ex0206.array.goods;
+package step02_Inheritance.ex0211.overriding.goods;
 /**
   상품으로 속성을 관리하는 개체
 */
@@ -52,5 +52,10 @@ public class Goods{
 	}
 	public String getExplain() {
 		return this.explain;
+	}
+	
+	@Override
+	public String toString() {
+		return code + "|" + name + "|" + price + "|" + explain;
 	}
 }

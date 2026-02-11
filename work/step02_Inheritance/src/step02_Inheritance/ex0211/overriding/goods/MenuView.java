@@ -1,4 +1,4 @@
-package ex0206.array.goods;
+package step02_Inheritance.ex0211.overriding.goods;
 
 import java.util.Scanner;
 
@@ -19,7 +19,7 @@ public class MenuView {
     /**
      * 전체 메뉴를 출력하는 메소드
      */
-    public void printMenu(String[][] data) {
+    public void printMenu() {
 
         //전달 받은 초기치 데이터를 서비스에 전달해서 배열에 저장한다.
         //service.init(data);
