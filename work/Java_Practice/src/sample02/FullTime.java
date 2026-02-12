@@ -30,11 +30,20 @@ public class FullTime extends Employee{
 		this.bonus = bonus;
 	}
 	
+//	@Override
+//	public String toString() {
+//		return this.getEmpNo() + " | " + this.geteName()+ " | " + this.getJob()+ " | " + this.getMgr()+ " | " + this.getHiredate()+ " | "+ this.getDeptName() + " | " +  this.getSalary() + " | " + this.getBonus();
+//	}
+	
 	@Override
 	public String toString() {
-		return this.getEmpNo() + " | " + this.geteName()+ " | " + this.getJob()+ " | " + this.getMgr()+ " | " + this.getHiredate()+ " | "+ this.getDeptName() + " | " +  this.getSalary() + " | " + this.getBonus();
+		StringBuilder builder = new StringBuilder();
+		builder.append("FullTime [toString()=");
+		builder.append(super.toString());
+		builder.append("]");
+		return builder.toString();
 	}
-	
+
 	@Override
 	public void message() {
 		super.message();

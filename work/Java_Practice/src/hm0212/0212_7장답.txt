@@ -1,0 +1,13 @@
+1.1
+2.2
+3.1
+4.4
+5.2
+6.자식클래스의 this.name 대신 super.name 해야함 자식 객체에서는 name 필드가 없음
+7. parent(String nation) call -> parent() call -> child(String nation) call -> child call
+8. 스노우 타이어가 굴러갑니다. 2번호출
+이유: 타이어 객체가 자식타입의 객체를 사용하므로
+9. 2
+10.컴퓨터 클래스에서 wokr() 추상메소드를 재정의 안해서
+11. super
+12. a instanceof C
