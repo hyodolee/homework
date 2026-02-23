@@ -1,14 +1,19 @@
 package mvc.dto;
+
+import java.io.Serializable;
+
 /**
  * 전자제품의 속성을 관리하는 객체 
  */
 
-public class Electronics /*implements Comparable<Electronics>*/{
+public class Electronics implements Serializable  /*implements Comparable<Electronics>*/{
     private int modelNo;
     private String modelName;
     private int modelPrice;
     private String modelDetail;
 
+    private static final long serialVersionUID = 1L;
+    
     // 생성자 3개
     public Electronics () {}
 

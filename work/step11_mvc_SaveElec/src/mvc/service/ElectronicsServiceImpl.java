@@ -1,6 +1,10 @@
 package mvc.service;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -32,8 +36,19 @@ public class ElectronicsServiceImpl implements ElectronicsService {
      * 
      */
     private ElectronicsServiceImpl() {
-    	if() {//객체를 파일에 저장한 파일이 존재한다면
+    	File file = new File("src/record.txt");
+    	
+    	if(file.exists()) {//객체를 파일에 저장한 파일이 존재한다면
     		//저장된파일로딩
+        	try(ObjectInputStream ois = 
+        			new ObjectInputStream(new FileInputStream("src/record.txt"))){
+        		
+        		list = (List<Electronics>)ois.readObject();
+        		System.out.println(list);
+        		
+        	}catch (Exception e) {
+    			e.printStackTrace();
+    		}
     	}else {
     		ResourceBundle rb = ResourceBundle.getBundle("InitInfo");//dbInfo.properties
             for(String key : rb.keySet()) {
@@ -175,6 +190,17 @@ public class ElectronicsServiceImpl implements ElectronicsService {
 	@Override
 	public void saveObject() {
 		// 종료를 했을때 현재 list를 파일에 저장한다
+		//직렬화가 구현되어 있는 ArrayList사용
+		List<Electronics> list = new ArrayList<>(this.selectAll()); 
+		
+		try(ObjectOutputStream oos =
+    			new ObjectOutputStream(
+    					new FileOutputStream("src/record.txt"))){
+    		
+    		oos.writeObject(list);
+    	}catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 	

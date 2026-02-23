@@ -1,9 +1,11 @@
 package mvc.controller;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import mvc.dto.Electronics;
-import mvc.exception.DMLException;
 import mvc.exception.DuplicateModelNoEexepction;
 import mvc.exception.ElectronicsArrayBoundsException;
 import mvc.exception.SearchNotFoundException;
@@ -33,6 +35,14 @@ public class ElectronicsController {
     }
  
 
+    /**
+     * 전자제품 record 파일에 기록
+     */
+    public void insertFile() {
+    	
+    	service.saveObject();
+    }
+    
 	 /**
      * 전자제품 등록 (길이 벗어낫는지, 중복여부 체크)
      */
